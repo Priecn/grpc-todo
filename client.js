@@ -20,3 +20,10 @@ client.createTodo({
 client.readTodos({}, (err, response) => {
     console.log("Todos: " + JSON.stringify(response));
 });
+
+const call = client.readTodoStream();
+call.on("data", item => {
+    console.log("Got item in stream: " + JSON.stringify(item));
+})
+
+call.on("end", end => console.log("Server done!!"));
